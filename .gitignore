@@ -1,1 +1,3 @@
-/zac_env
+zac_env/
+.vscode/
+*.csv
