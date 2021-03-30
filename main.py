@@ -66,6 +66,7 @@ for i, lat, lon, alt, state in df_locations.itertuples():
 
     df_acdc = pd.concat((mc.ac.rename('AC'), mc.dc.rename('DC')), axis = 1)
 
+    # writes to current directory with location index number in the filename
     df_acdc.to_csv(f"solar_AC_DC_location_{i}.csv")
 
 
