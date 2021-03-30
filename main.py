@@ -56,8 +56,8 @@ for i, lat, lon, alt, state in df_locations.itertuples():
     df_res = pd.concat([df_ghi[i].rename('ghi'), df_temp[i].rename('temp_air'), df_wind[i].rename('wind_speed'), solpos['zenith']], axis = 1)
 
     # # list comprehension is slightly faster than apply
-    # df_res['dni'] = df_res.apply(lambda row: pvlib.irradiance.disc(row.ghi, row.zenith, row.name)['dni'], axis = 1).astype(np.float64)
-    df_res['dni'] = pd.Series([pvlib.irradiance.disc(ghi, zen, i)['dni'] for ghi, zen, i in zip(df_res['ghi'], df_res['zenith'], df_res.index)]).astype(np.float64)
+    # df_res['dni'] = df_res.apply(lambda row: pvlib.irradiance.disc(row.ghi, row.zenith, row.name)['dni'], axis = 1).astype(float)
+    df_res['dni'] = pd.Series([pvlib.irradiance.disc(ghi, zen, i)['dni'] for ghi, zen, i in zip(df_res['ghi'], df_res['zenith'], df_res.index)], index = times).astype(float)
     df_res['dhi'] = df_res['ghi'] - df_res['dni']*np.cos(np.radians(df_res['zenith']))
 
     weather = df_res.drop('zenith', axis = 1)
