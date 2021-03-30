@@ -1,3 +1,4 @@
 zac_env/
 .vscode/
 *.csv
+test.ipynb
